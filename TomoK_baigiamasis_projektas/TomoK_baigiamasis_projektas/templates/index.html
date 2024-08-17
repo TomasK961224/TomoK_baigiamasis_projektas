@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Kingdom of animals</h1>
+  <p>Welcome to the kingdom of animals !</p>
+  <p>Read, watch and enjoy !:</p>
+  <ul>
+    <li><strong>Categories of animals:</strong> {{ num_animal_categories }}</li>
+    <li><strong>Animals in our website:</strong> {{ num_animals }}</li>
+    <li><strong>Tags:</strong> {{ num_tags }}</li>
+    <li><strong>Blog Posts:</strong> {{ num_blogposts }}</li>
+  </ul>
+{% endblock %}
