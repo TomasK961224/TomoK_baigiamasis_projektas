@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-
-{% block content %}
-  <h1>Categories</h1>
-  <p>Our animal category list.</p>
-  {% for a in animal_categories %}
-    <li>{{a.name}} {{a.description}}</li>
-    {% endfor %}
-{% endblock %}
