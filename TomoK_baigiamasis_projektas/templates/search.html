@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Paieškos pagal "{{query}}" rezultatai:</h1>
+  </br>
+  {% if animals %}
+  <ul>
+    {% for animal in animals %}
+      <li>
+        <a href="{% url 'animal_detail' animal.id %}">{{ animal.name }}</a> ({{animal.scientific_name}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>Oops. Nieko neradome :(</p>
+  {% endif %}
+
+  {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ animal.name }}</h1>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Detaliau:</h4>
+
+
+      <p><strong>Name of animal:</strong> {{ animal.name }}</p>
+      <p><strong>Scientific name of animal:</strong> {{ animal.scientific_name }}</p>
+      <p><strong>Description of animal:</strong> {{ animal.description }}</p>
+      <p><strong>Habitat of animal:</strong> {{ animal.habitat }}</p>
+      <p><strong>Diet of animal:</strong> {{ animal.diet }}</p>
+      <p><strong>Conservation status of animal:</strong> {{ animal.conservation_status }}</p>
+
+  </div>
+{% endblock %}
