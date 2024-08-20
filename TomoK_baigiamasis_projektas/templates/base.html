@@ -16,13 +16,17 @@
       {% block sidebar %}
         <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home Page</a></li>
-          <li><a href="">List of Animal Categories</a></li>
-          <li><a href="">List of Animals in a Category</a></li>
-            <li><a href="">Animal Detail Page</a></li>
+          <li><a href="{% url 'animal_categories' %}">List of Animal Categories</a></li>
+            <li><a href="{% url 'animals_list' %}">Our Animals List Page</a></li>
           <li><a href="">Blog List</a></li>
           <li><a href="">Blog Detail Page</a></li>
           <li><a href="">About Us Page</a></li>
           <li><a href="">Contact Us Page</a></li>
+          <li>
+              <form action="{% url 'search' %}" method="get" class="form-inline my-2 my-md-0">
+              <input name="query" class="form-control" type="text" placeholder="Paieška">
+              </form>
+          </li>
         </ul>
      {% endblock %}
       </div>

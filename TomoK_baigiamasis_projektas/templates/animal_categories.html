@@ -4,6 +4,25 @@
   <h1>Categories</h1>
   <p>Our animal category list.</p>
   {% for a in animal_categories %}
-    <li>{{a.name}} {{a.description}}</li>
+    <li><a href="{% url 'animals_in_category' a.id %}">{{a.name}}</li>
     {% endfor %}
+<div class="container puslapiai">
+    <nav aria-label="...">
+        {% if animal_categories.has_other_pages %}
+            <ul class="pagination pagination-sm justify-content-end">
+                {% for i in animal_categories.paginator.page_range %}
+                    {% if animal_categories.number == i %}
+                        <li class="page-item active">
+                            <a class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </nav>
+</div>
 {% endblock %}

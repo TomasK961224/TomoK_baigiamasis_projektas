@@ -18,7 +18,7 @@ class Animal(models.Model):
     habitat = models.TextField('Habitat of animal', max_length=2000)
     diet = models.TextField('Diet of animal', max_length=2000)
     conservation_status = models.CharField('Status of conservation', max_length=200)
-    image = models.ImageField(upload_to='animals/')
+    image = models.ImageField('Image', upload_to='covers', null=True)
 
     def __str__(self):
         return self.name
