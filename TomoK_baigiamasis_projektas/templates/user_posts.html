@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My posts of animals</h1>
+
+    {% if blogpost_list %}
+    <ul>
+
+      {% for blogpost in blogpost_list %}
+      <li class="{% if blogpost.is_created_at %}text-danger{% endif %}">
+        <a href="{% url 'animal_detail' blogpost.animal.pk %}">{{blogpost.title}}</a> ({{ blogpost.content | safe }} {{ blogpost.created_at }} {{blogpost.author}})
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>Now there aren't any posts from you yet.</p>
+    {% endif %}       
+{% endblock %}
