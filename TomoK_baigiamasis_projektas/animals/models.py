@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
+from tinymce.models import HTMLField
 
 # Create your models here.
 class AnimalCategory(models.Model):
@@ -31,12 +32,12 @@ class Tag(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField('Title of Post', max_length=200)
-    content = models.TextField('Content written by user', max_length=2000)
+    content = HTMLField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     tag = models.ManyToManyField('Tag', blank=True)
     excerpt = models.TextField(blank=True)
-    featured_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
+    featured_image = models.ImageField('Featured image', upload_to='covers', blank=True, null=True)
     STATUS_CHOICES = (
         ('a', 'Draft'),
         ('b', 'Published'),

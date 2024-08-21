@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
 {% block content %}
+{% load static %}
     <h1>List of animals</h1></br>
     {% if animal_list %}
     <div class="row">
@@ -13,8 +13,8 @@
               <img src="{% static 'img/no-image.png' %}" class="card-img-top">
             {% endif %}
             <div class="card-body">
-              <h6 class="card-subtitle mb-2 text-muted">{{ animal.category }}</h6>
-              <p class="card-text"><a href="{{ animal.name }}">{{ animal.scientific_name }}</a></p>
+              <h6 class="card-subtitle mb-2 text-muted">{{ animal.scientific_name }}</h6>
+              <p class="card-text"><a href="{{ animal.id }}">{{ animal.name }}</a></p>
             </div>
           </div>
         </div>

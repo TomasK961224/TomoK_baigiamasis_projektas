@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 def index(request):
@@ -13,13 +14,15 @@ def index(request):
     num_tags = Tag.objects.all().count()
     num_blogposts = BlogPost.objects.all().count()
 
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
     context = {
         'num_animal_categories': num_animal_categories,
         'num_animals': num_animals,
         'num_tags': num_tags,
         'num_blogposts': num_blogposts,
+        'num_visits': num_visits,
     }
-
     return render(request, 'index.html', context=context)
 
 
@@ -55,3 +58,12 @@ def search(request):
     query = request.GET.get('query')
     search_results = Animal.objects.filter(Q(name__icontains=query) | Q(scientific_name__icontains=query))
     return render(request, 'search.html', {'animals': search_results, 'query': query})
+
+
+class UserPostsListView(LoginRequiredMixin, generic.ListView):
+    model = BlogPost
+    template_name = 'user_posts.html'
+    paginate_by = 1
+
+    def get_queryset(self):
+        return BlogPost.objects.filter(author=self.request.user).filter(status__exact='b').order_by('created_at')
