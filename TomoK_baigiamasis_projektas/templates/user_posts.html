@@ -2,18 +2,21 @@
 
 {% block content %}
     <h1>My posts of animals</h1>
-
     {% if blogpost_list %}
-    <ul>
+        {% for blogpost in blogpost_list %}
+    <hr>
+        <ul>
 
-      {% for blogpost in blogpost_list %}
-      <li class="{% if blogpost.is_created_at %}text-danger{% endif %}">
-        <a href="{% url 'animal_detail' blogpost.animal.pk %}">{{blogpost.title}}</a> ({{ blogpost.content | safe }} {{ blogpost.created_at }} {{blogpost.author}})
+        <img class="rounded-circle" src="{{blogpost.author.profile.photo.url}}">
+        <li><strong class="{% if blogpost.is_published %}text-danger{% endif %}">Title: {{blogpost.title}}</strong></li>
+        <li><strong>Date posted:</strong> {{blogpost.created_at}}</li>
+        <br/>
+        <a class="btn btn-primary" href="{{ blogpost.pk }}" role="button">View</a>
       </li>
-      {% endfor %}
-    </ul>
 
+    </ul>
+{% endfor %}
     {% else %}
-      <p>Now there aren't any posts from you yet.</p>
-    {% endif %}       
+      <p>There are no animals published.</p>
+    {% endif %}
 {% endblock %}

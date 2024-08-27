@@ -9,10 +9,32 @@
 
       <p><strong>Name of animal:</strong> {{ animal.name }}</p>
       <p><strong>Scientific name of animal:</strong> {{ animal.scientific_name }}</p>
-      <p><strong>Description of animal:</strong> {{ animal.description }}</p>
-      <p><strong>Habitat of animal:</strong> {{ animal.habitat }}</p>
-      <p><strong>Diet of animal:</strong> {{ animal.diet }}</p>
-      <p><strong>Conservation status of animal:</strong> {{ animal.conservation_status }}</p>
+      <p><strong>Description of animal:</strong> {{ animal.description | safe }}</p>
+      <p><strong>Habitat of animal:</strong> {{ animal.habitat | safe }}</p>
+      <p><strong>Diet of animal:</strong> {{ animal.diet | safe }}</p>
+      <p><strong>Conservation status of animal:</strong> {{ animal.conservation_status | safe }}</p>
 
   </div>
+</br>
+  <h4>Atsiliepimai:</h4>
+  {% if animal.animalreview_set.all %}
+    {% for review in animal.animalreview_set.all %}
+      <hr>
+      <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created}}</em>
+      <p>{{ review.content }}</p>
+    {% endfor %}
+  {% else %}
+    <p>This animal does'nt have any comments</p>
+  {% endif %}
+  {% if user.is_authenticated %}
+  <div class="fieldWrapper">
+    <hr><br/>
+    <h4>Leave your review:</h4>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.content }}</br>
+      <input type="submit" value="Išsaugoti">
+    </form>
+  </div>
+  {% endif %}
 {% endblock %}
