@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My post about animal:</h1>
+    <hr>
+        <ul>
+        <img class="rounded-circle" src="{{blogpost.author.profile.photo.url}}">
+        <li><strong class=>Title of post: {{object.title}}</strong></li>
+            <li><strong class=>Content written by user:</strong> {{ object.content | safe }}</li>
+            <li>
+                <a href="{% url 'animal_detail' blogpost.animal.pk %}">{{blogpost.title}}</a>
+            </li>
+            <li><strong>Posted at:</strong> {{object.created_at}}</li>
+            {% if object.author == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user_post_update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'user_post_delete' object.id %}">Delete</a>
+            </div>
+            {% endif %}
+        <br/>
+      </li>
+    </ul>
+{% endblock %}
