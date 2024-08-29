@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My posts of animals</h1>
+    {% if blogpost_list %}
+        {% for blogpost in blogpost_list %}
+    <hr>
+        <ul>
+
+        <img class="rounded-circle" src="{{blogpost.author.profile.photo.url}}">
+        <li><strong class="{% if blogpost.is_published %}text-danger{% endif %}">Title: {{blogpost.title}}</strong></li>
+        <li><strong>Date posted:</strong> {{blogpost.created_at}}</li>
+        <br/>
+        <a class="btn btn-primary" href="{{ blogpost.pk }}" role="button">View</a>
+      </li>
+
+    </ul>
+{% endfor %}
+    {% else %}
+      <p>There are no animals published.</p>
+    {% endif %}
+{% endblock %}
